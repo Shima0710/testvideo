@@ -33,7 +33,7 @@
     <div id="wrapper">
         <div class="ms-section" id="main-section">
             <!-- 自動再生・音声なし・インライン再生 -->
-            <video autoplay muted playsinline loop>
+            <video id="main-video" muted playsinline loop>
                 <source src="video/main.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -41,5 +41,27 @@
             <div class="particle" id="pt-main"></div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const video = document.getElementById("main-video");
+
+            // 動画の自動再生設定
+            video.muted = true; // 音声なし
+            video.playsInline = true; // インライン再生
+
+            // 動画の再生を試みる
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        console.log("動画が正常に再生されました。");
+                    })
+                    .catch((error) => {
+                        console.error("自動再生が制限されました:", error);
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
